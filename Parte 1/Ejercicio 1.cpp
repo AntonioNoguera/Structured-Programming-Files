@@ -136,42 +136,30 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
+	centerTitle("- Calculadora de grados Farenheit dando Celsius -");
+	
 	struct CampoDeInformacion mainMonto = {
 		{ 1, 3 },
-        "Ingrese el valor del monto principal: ",
+        "Ingrese el valor de temperatura en grados Celsius: ",
         NULL,
         decimal,
         false
     };
-	
-	struct CampoDeInformacion tasaInteres = {
-		{ 1, 5 },
-        "Ingrese el valor de la tasa de interes: ",
-        NULL,
-        true,
-        false
-    };
     
-    struct CampoDeInformacion tiempo = {
-		{ 1, 7 },
-        "Ingrese el valor del tiempo transcurrido: ",
-        NULL,
-        false,
-        false
-    };
     
-    centerTitle("- Calculador del monto final, dando el monto inicial, tiempo y la tasa de interes -");
+	float tempFarenheit = 0;
 	
-	float montoTotal = 0;
+	do{
+		capturarDato(&mainMonto); 
+		
+		if(atof(mainMonto.valor)<0 || atof(mainMonto.valor)>100){
+			printf("La temperatura puede estar en un rango de 0 hasta 100");
+		}
+	}while(atof(mainMonto.valor)<0 || atof(mainMonto.valor)>100);
 	
-	capturarDato(&mainMonto);
-	capturarDato(&tasaInteres);
-	capturarDato(&tiempo);
+	tempFarenheit = (atof(mainMonto.valor) * (1.8)) + 32;
 	
-	
-	montoTotal = atof(mainMonto.valor) + (atof(mainMonto.valor) * atof(tasaInteres.valor) * atof(tiempo.valor));
-	
-	struct dataCord final = { 1, 10 }; gotoxy(&final);
-	printf("Resultado del monto total: %0.4f",montoTotal);
+	struct dataCord final = { 1, 5 }; gotoxy(&final);
+	printf("Resultado del monto total: %0.4f",tempFarenheit);
 	
  }

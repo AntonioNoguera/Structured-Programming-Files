@@ -136,42 +136,29 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion mainMonto = {
+	struct CampoDeInformacion mainData = {
 		{ 1, 3 },
         "Ingrese el valor del monto principal: ",
         NULL,
         decimal,
         false
     };
-	
-	struct CampoDeInformacion tasaInteres = {
-		{ 1, 5 },
-        "Ingrese el valor de la tasa de interes: ",
-        NULL,
-        true,
-        false
-    };
     
-    struct CampoDeInformacion tiempo = {
-		{ 1, 7 },
-        "Ingrese el valor del tiempo transcurrido: ",
-        NULL,
-        false,
-        false
-    };
-    
-    centerTitle("- Calculador del monto final, dando el monto inicial, tiempo y la tasa de interes -");
+    centerTitle("- Definir si el número otorgado es par o no -");
 	
 	float montoTotal = 0;
 	
-	capturarDato(&mainMonto);
-	capturarDato(&tasaInteres);
-	capturarDato(&tiempo);
+	capturarDato(&mainMonto); 
 	
 	
-	montoTotal = atof(mainMonto.valor) + (atof(mainMonto.valor) * atof(tasaInteres.valor) * atof(tiempo.valor));
+	montoTotal = atof(mainMonto.valor);
+	
 	
 	struct dataCord final = { 1, 10 }; gotoxy(&final);
 	printf("Resultado del monto total: %0.4f",montoTotal);
+	
+	if(){
+		
+	}
 	
  }

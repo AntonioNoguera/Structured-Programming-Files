@@ -1,23 +1,19 @@
-//Mikes Sandbox
-
-#include<stdio.h>
-
-void contador() {
-	//practicamente como declarar una variable global publica ( en la misma clase-fichero, se sobre
-	//entiende como publica), wtf no respeta la reasignacion
-  static int var_estatica = 0;
-  int var_no_estatica = 0;
-
-  var_estatica*++;
-  var_no_estatica++;
-  
-  printf("Estática: %d No estatica: %d\n", var_estatica, var_no_estatica);
-}
+#include <stdio.h>
 
 int main() {
-	for( int i=0; i<10; i++ ){
-		printf("Calling Function: %d   -    ",i);
-		contador();
-	}
-  
+    // Definir una variable de tipo int
+    int numero = 42;
+
+    // Definir un puntero void y asignarle la dirección de la variable int
+    void *punteroVoid = &numero;
+
+    // Para acceder al valor almacenado en el puntero void, es necesario realizar una conversión de tipo
+    // En este caso, convertimos el puntero void de nuevo a un puntero int y luego dereferenciamos para obtener el valor
+    int *punteroInt = (int *)punteroVoid;
+    int valor = *punteroInt;
+
+    // Imprimir el valor
+    printf("El valor almacenado es: %d\n", valor);
+
+    return 0;
 }
