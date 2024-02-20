@@ -155,6 +155,7 @@ void capturarDato(struct CampoDeInformacion *data){
 		if(atof(mainMonto.valor)<0 || atof(mainMonto.valor)>100){
 			printf("La temperatura puede estar en un rango de 0 hasta 100");
 		}
+		
 	}while(atof(mainMonto.valor)<0 || atof(mainMonto.valor)>100);
 	
 	tempFarenheit = (atof(mainMonto.valor) * (1.8)) + 32;

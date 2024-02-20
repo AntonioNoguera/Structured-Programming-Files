@@ -1,5 +1,4 @@
-//2. Pide al usuario el monto principal, la tasa de interés y el tiempo en
-//Número par e Impar
+//Pregunta al usuario la distancia recorrieda enKm, el tiempo en horas, Velocidad promedio por hora
 #include <stdio.h>  
 #include <stdlib.h>
 #include <windows.h>
@@ -7,7 +6,7 @@
 const bool entero = false;
 const bool decimal = true;
 
-const bool soloPositivos = false;
+const bool positivo = false;
 const bool negYpositivos = true;
 
 // Main Structures
@@ -135,24 +134,46 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion datoIngresado = {
+	struct CampoDeInformacion distanciaKm = {
 		{ 1, 3 },
-        "Ingrese el valor del monto principal: ",
+        "Ingrese la distancia recorrida en Kilometros: ",
         NULL,
-        entero,
-        negYpositivos
+        decimal,
+        positivo
     };
     
-    centerTitle("- Definir si el numero otorgado es par o no -");
-		 
-	capturarDato(&datoIngresado);
-	struct dataCord final = { 1, 5 }; gotoxy(&final);
-	printf("El n%cmero capturado es ",163);
+    struct CampoDeInformacion tiempoHoras = {
+		{ 1, 5 },
+        "Ingrese el numero de horas en la que se recorrio la distancia: ",
+        NULL,
+        decimal,
+        positivo
+    };
+    
+    centerTitle("- Calcular el precio final dado el precio inicial y el descuento -");
 	
-	if(atoi(datoIngresado.valor)%2 == 0){
-		printf("par!");	
-	}else{
-		printf("impar!");	
-	}
+	do{
+		capturarDato(&distanciaKm);
+		
+		if(atof(distanciaKm.valor) == 0){
+			printf("El valor no puede ser 0");
+			getchar();getchar();
+		}
+		
+	}while(atof(distanciaKm.valor) == 0);
 	
+	do{
+		capturarDato(&tiempoHoras);
+		
+		if(atof(tiempoHoras.valor) == 0 ){
+			printf("El valor no puede ser 0");
+			getchar();getchar();
+		}
+	}while(atof(tiempoHoras.valor) == 0 );
+	
+	struct dataCord final = { 1, 7 }; gotoxy(&final);
+	
+	float valorFinal = atof(distanciaKm.valor) / atof(tiempoHoras.valor);
+	
+	printf("La velocidad promedio fue: %0.4f km/h",valorFinal);
  }

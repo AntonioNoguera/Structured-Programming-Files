@@ -1,0 +1,58 @@
+EJ1:
+Recibir temp en Celsius y convertirla a Farenheit
+donde Farh = Celsius * (9/5) + 32
+Donde:
+Celsius 
+
+
+EJ2:
+ON WORK
+
+
+EJ3:
+Recibir un número y decidir si es par o impar xd
+
+EJ4.- Precio, porcentaje de descuento, precio final:
+Donde:
+
+
+EJ5: Pregunta al usuario la distancia recorrieda enKm, el tiempo en horas, Velocidad promedio por hora
+
+
+EJ6: Calculadora de IMC
+Donde:
+IMC = Peso / (altura*altura)
+
+
+EJ7: Número primo o no
+
+
+EJ8: Costo de articulo, dinero, calcular cambio
+
+EJ 9: Número de segundos en cierto numero de días
+
+EJ 10:  Calculadora de area y perimetro de un circulo
+
+
+----------------
+
+Ej 01: Calculadora simple de dos números otorgados por el usuario
+
+Ej 02: Factorial del n número, Recursion nadamas para mamonear
+
+Ej 03: Número ENTERO otorgado por el usuario, obtener el número de digitos
+
+Ej 04: Programa que genera los N términos de la secuencia fibonacci
+
+Ej 05: Promedio de cierto número de datos, hasta que el usuario que imprima una cadena específica.
+
+Ej 06: Escribe un programa que realice un conteo regresivo desde un número entero ingresado hasta 1 xd 
+
+Ej 07: Escribe un número del 1 al 7, y muestre el día de la semana correspondiente. Lol
+
+Ej 08: Calificación del 1 al 10 entera, y distribuye entre A y F, usando un switch?
+
+Ej 09: Pedir un número de mes, y mediantes un switch desplegar el número de días que contiene
+
+Ej 10: Pedir el precio de un productos, el tipo de usuario, aplicar un descuento en base al tipo del cliente, desplegar el precio final.
+

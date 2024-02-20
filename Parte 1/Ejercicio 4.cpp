@@ -1,5 +1,4 @@
-//2. Pide al usuario el monto principal, la tasa de interés y el tiempo en
-//Número par e Impar
+// Precio, porcentaje de descuento, precio final:
 #include <stdio.h>  
 #include <stdlib.h>
 #include <windows.h>
@@ -7,7 +6,7 @@
 const bool entero = false;
 const bool decimal = true;
 
-const bool soloPositivos = false;
+const bool positivo = false;
 const bool negYpositivos = true;
 
 // Main Structures
@@ -135,24 +134,46 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion datoIngresado = {
+	struct CampoDeInformacion precioInicial = {
 		{ 1, 3 },
-        "Ingrese el valor del monto principal: ",
+        "Ingrese el valor del precio inicial: ",
         NULL,
-        entero,
-        negYpositivos
+        decimal,
+        positivo
     };
     
-    centerTitle("- Definir si el numero otorgado es par o no -");
-		 
-	capturarDato(&datoIngresado);
-	struct dataCord final = { 1, 5 }; gotoxy(&final);
-	printf("El n%cmero capturado es ",163);
+    struct CampoDeInformacion porcentajeDescuento = {
+		{ 1, 5 },
+        "Ingrese el valor del porcentaje de descuento: ",
+        NULL,
+        decimal,
+        positivo
+    };
+    
+    centerTitle("- Calcular el precio final dado el precio inicial y el descuento -");
 	
-	if(atoi(datoIngresado.valor)%2 == 0){
-		printf("par!");	
-	}else{
-		printf("impar!");	
-	}
+	do{
+		capturarDato(&precioInicial);
+		
+		if(atoi(precioInicial.valor) == 0){
+			printf("El valor no puede ser 0");
+			getchar();getchar();
+		}
+		
+	}while(atoi(precioInicial.valor) == 0);
 	
+	do{
+		capturarDato(&porcentajeDescuento);
+		
+		if(atof(porcentajeDescuento.valor) <= 0 || atof(porcentajeDescuento.valor) > 100){
+			printf("El valor no puede ser 0");
+			getchar();getchar();
+		}
+	}while(atof(porcentajeDescuento.valor) <= 0 || atof(porcentajeDescuento.valor) > 100);
+	
+	struct dataCord final = { 1, 7 }; gotoxy(&final);
+	
+	float valorFinal = atof(precioInicial.valor) - (atof(precioInicial.valor) * atof(porcentajeDescuento.valor)*.01);
+	
+	printf("El valor final del producto es: %0.4f",valorFinal);
  }
