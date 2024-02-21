@@ -1,4 +1,4 @@
-////Pregunta al usuario la distancia recorrieda enKm, el tiempo en horas, Velocidad promedio por hora
+///EJ8: Costo de articulo, dinero, calcular cambio
 #include <stdio.h>  
 #include <stdlib.h>
 #include <windows.h>
@@ -54,6 +54,7 @@ struct CampoDeInformacion{
  
 
 void errorDeValidacion(struct dataCord *cords, char mensajeError[]){ 
+	clearLine(cords);
 	gotoxy(cords);
 	printf("%s",mensajeError);
 	getchar();
@@ -134,47 +135,55 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion masa = {
+	struct CampoDeInformacion precio = {
 		{ 1, 3 },
-        "Ingrese el valor del peso corporal en Kg: ",
+        "Ingrese el precio del articulo: ",
         NULL,
         decimal,
         positivo
     };
     
-    struct CampoDeInformacion altura = {
+    //Definición de los tipos de datos requeridos
+	struct CampoDeInformacion efectivo = {
 		{ 1, 5 },
-        "Ingrese el valor de la altura corporal en Metros: ",
+        "Ingrese el monto de pago: ",
         NULL,
         decimal,
         positivo
     };
     
-    
-    centerTitle("- Calculadora de Indice de Masa Corporal -");
+    centerTitle("- Calculadora de Cambio -");
 	
 	do{
-		capturarDato(&masa);
-		//640
-		if(atof(masa.valor) == 0 || atof(masa.valor)>640){
-			printf("El valor se encuentra fuera de los rangos humanos.");
+		capturarDato(&precio);
+		
+		if(atof(precio.valor) == 0){
+			printf("El precio no puede ser 0.");
 			getchar();getchar();
 		}
 		
-	}while(atof(masa.valor) == 0 || atof(masa.valor)>640);
+	}while(atof(precio.valor) == 0);
+	
 	
 	do{
-		capturarDato(&altura);
-		//3
-		if(atof(altura.valor) == 0 || atof(altura.valor) > 3){
-			printf("El valor se encuentra fuera de los rangos humanos.");
+		capturarDato(&efectivo);
+		
+		if(atof(efectivo.valor) == 0){
+			printf(" El efectivo  no puede ser 0.");
+			getchar();getchar();
+		}else if((atof(efectivo.valor)-atof(precio.valor))<0){
+			printf(" La cantidad de efectivo no es la suficiente, ingresa nueva cantidad de efectivo.");
+			efectivo.valor="0";
 			getchar();getchar();
 		}
-	}while(atof(altura.valor) == 0 || atof(altura.valor) > 3 );
+			
+	}while(atof(efectivo.valor) == 0 || (atof(efectivo.valor)-atof(precio.valor))<0);
+	
+	//Codificación específica
+	
+	float valor = atof(efectivo.valor)-atof(precio.valor);
 	
 	struct dataCord final = { 1, 7 }; gotoxy(&final);
-	
-	float valorFinal = atof(masa.valor) / (atof(altura.valor)*atof(altura.valor));
-	
-	printf("El valor del IMC es de: %0.4f km/h",valorFinal);
+	printf("El articulo ha sido comprado, el cambio final es %0.4f ",valor);
+		
  }

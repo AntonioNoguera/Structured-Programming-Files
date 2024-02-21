@@ -1,4 +1,5 @@
-////Pregunta al usuario la distancia recorrieda enKm, el tiempo en horas, Velocidad promedio por hora
+//EJ 10:  Calculadora de area y perimetro de un circulo
+
 #include <stdio.h>  
 #include <stdlib.h>
 #include <windows.h>
@@ -54,6 +55,7 @@ struct CampoDeInformacion{
  
 
 void errorDeValidacion(struct dataCord *cords, char mensajeError[]){ 
+	clearLine(cords);
 	gotoxy(cords);
 	printf("%s",mensajeError);
 	getchar();
@@ -134,47 +136,33 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion masa = {
+	struct CampoDeInformacion radio = {
 		{ 1, 3 },
-        "Ingrese el valor del peso corporal en Kg: ",
+        "Ingrese el valor del radio de tu circulo en metros: ",
         NULL,
-        decimal,
+        entero,
         positivo
     };
     
-    struct CampoDeInformacion altura = {
-		{ 1, 5 },
-        "Ingrese el valor de la altura corporal en Metros: ",
-        NULL,
-        decimal,
-        positivo
-    };
-    
-    
-    centerTitle("- Calculadora de Indice de Masa Corporal -");
+    centerTitle("- Calculadora del area y perimetro de un circulo -");
 	
 	do{
-		capturarDato(&masa);
-		//640
-		if(atof(masa.valor) == 0 || atof(masa.valor)>640){
-			printf("El valor se encuentra fuera de los rangos humanos.");
+		capturarDato(&radio);
+		
+		if(atof(radio.valor) == 0){
+			printf("El valor del radio no puede ser 0.");
 			getchar();getchar();
 		}
 		
-	}while(atof(masa.valor) == 0 || atof(masa.valor)>640);
+	}while(atof(radio.valor) == 0);
 	
-	do{
-		capturarDato(&altura);
-		//3
-		if(atof(altura.valor) == 0 || atof(altura.valor) > 3){
-			printf("El valor se encuentra fuera de los rangos humanos.");
-			getchar();getchar();
-		}
-	}while(atof(altura.valor) == 0 || atof(altura.valor) > 3 );
+	
+	//Codificación específica
+	
+	double area = atof(radio.valor)*atof(radio.valor) * (3.14159);
+	double perimetro = atof(radio.valor) * 2 * (3.14159);
 	
 	struct dataCord final = { 1, 7 }; gotoxy(&final);
-	
-	float valorFinal = atof(masa.valor) / (atof(altura.valor)*atof(altura.valor));
-	
-	printf("El valor del IMC es de: %0.4f km/h",valorFinal);
+	printf("El area del circulo es: %0.4f m%c y su perimetro es: %0.4f m",area,253,perimetro);
+		
  }
