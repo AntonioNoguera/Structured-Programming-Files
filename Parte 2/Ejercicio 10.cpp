@@ -1,8 +1,6 @@
-//Ej 05: Promedio de cierto número de datos, hasta que el usuario que imprima una cadena específica.
-
+//Ej  Pedir el precio de un productos, el tipo de usuario, aplicar un descuento en base al tipo del cliente, desplegar el precio final.
 #include <stdio.h>  
 #include <stdlib.h>
-#include <string.h>
 #include <windows.h>
 
 const bool entero = false;
@@ -46,7 +44,7 @@ struct CampoDeInformacion{
  
  void centerTitle(char tituloPrincipal[]){
  	
- 	int cordX = (110 - strlen(tituloPrincipal))/2;
+ 	int cordX = (120 - strlen(tituloPrincipal))/2;
  	
  	struct dataCord titulo = { cordX, 1 };
  	
@@ -113,7 +111,7 @@ void capturarDato(struct CampoDeInformacion *data){
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
 	 					
-						capturarDato(data);   
+						 (data);   
 					}
 				}
 					
@@ -137,50 +135,69 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion digito = {
+	struct CampoDeInformacion precio = {
 		{ 1, 3 },
-        "Ingresa valor a promediar: ",
+        "Ingresa el precio del producto: ",
+        NULL,
+        decimal,
+        positivo
+    };
+    
+    struct CampoDeInformacion tipoUsuario = {
+		{ 1, 5 },
+        "Ingresa el tipo de usuario 1 = No afiliado, 2 = Afiliado, 3 = Ejecutivo: ",
         NULL,
         entero,
-        negYpositivos
+        positivo
     };
+    
+    centerTitle("- Calculadora del precio final de un producto, dado un tipo de usuario -");
 	
-    centerTitle("- Calculadora de promedio -");
+	do{
+		capturarDato(&precio);
+		
+		if(atof(precio.valor)==0){
+			printf(" El precio no puede ser 0.");
+			getchar();getchar();
+		}
+	}while(atof(precio.valor)==0);
 	
-	char strFlag='W'; 
-	float sumatoria = 0;
-	int nDigitos = 0;
-	
-	do{ 
+	do{
+		capturarDato(&tipoUsuario);
 		
-		do{
-			capturarDato(&digito);
-			
-			if(atoi(digito.valor) == 0){
-				printf("El valor no puede ser 0, intenta nuevamente! ");
-				getchar();getchar();
-			}else{
-				sumatoria += atof(digito.valor);
-				nDigitos++;
-			}
-		
-		}while(atoi(digito.valor)==0);
-		
-		
-		printf(" \n %cDeseas continuar%c, presione F para Finalizar , cualquier otra tecla para finalizar: ",168,63);
-		scanf(" %c", &strFlag); 
-		
-		centerTitle("- Calculadora de promedio de ");
-		printf("%d digitos -",nDigitos);
-		
-	}while(strFlag != 'F');
+		if(atoi(tipoUsuario.valor)<1 || atoi(tipoUsuario.valor)>3){
+			printf(" El valor debe de ser desde 1 hasta 3, intenta nuevamente");
+			getchar();getchar();
+		}
+	}while(atoi(tipoUsuario.valor)<1 || atoi(tipoUsuario.valor)>3);
 	
 	//Codificación específica
 	
+	float precioCrudo = atof(precio.valor);
+	int numUsuario = atoi(tipoUsuario.valor);
+	
 	struct dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
-
-	float result = sumatoria/(nDigitos);
+	printf("El precio para el usuario ");
 	
-	printf("Valor final: %0.4f",result);
-	
+	switch(numUsuario) {
+        case 1:
+        	printf("no afiliado %0.4f, no hay descuento",precioCrudo);
+            break;
+            
+        case 2:
+        	precioCrudo = precioCrudo - precioCrudo*.10;
+        	printf("afiliado %0.4f, descuento de 10%c",precioCrudo,37);
+            break;
+            
+        case 3: 
+        	precioCrudo = precioCrudo - precioCrudo*.30;
+        	printf("ejecutivo %0.4f , descuento de 30%c",precioCrudo,37);
+            break;
+            
+        default:
+            printf("Sobrepasaste la validacion increible!");
+            break;
+    }
+    
+    return 0;
  }

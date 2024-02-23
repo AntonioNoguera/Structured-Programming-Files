@@ -1,8 +1,7 @@
-//Ej 05: Promedio de cierto número de datos, hasta que el usuario que imprima una cadena específica.
+//Ej 07: Escribe un número del 1 al 7, y muestre el día de la semana correspondiente.
 
 #include <stdio.h>  
 #include <stdlib.h>
-#include <string.h>
 #include <windows.h>
 
 const bool entero = false;
@@ -46,7 +45,7 @@ struct CampoDeInformacion{
  
  void centerTitle(char tituloPrincipal[]){
  	
- 	int cordX = (110 - strlen(tituloPrincipal))/2;
+ 	int cordX = (120 - strlen(tituloPrincipal))/2;
  	
  	struct dataCord titulo = { cordX, 1 };
  	
@@ -113,7 +112,7 @@ void capturarDato(struct CampoDeInformacion *data){
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
 	 					
-						capturarDato(data);   
+						 (data);   
 					}
 				}
 					
@@ -137,50 +136,63 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion digito = {
+	struct CampoDeInformacion diaSemana = {
 		{ 1, 3 },
-        "Ingresa valor a promediar: ",
+        "Ingresa el numero del 1 al 7 para desplegar el dia de la semana: ",
         NULL,
         entero,
-        negYpositivos
+        positivo
     };
+    
+    centerTitle("- Dia de la semana dando un numero del 1 al 7 -");
 	
-    centerTitle("- Calculadora de promedio -");
-	
-	char strFlag='W'; 
-	float sumatoria = 0;
-	int nDigitos = 0;
-	
-	do{ 
+	do{
+		capturarDato(&diaSemana);
 		
-		do{
-			capturarDato(&digito);
-			
-			if(atoi(digito.valor) == 0){
-				printf("El valor no puede ser 0, intenta nuevamente! ");
-				getchar();getchar();
-			}else{
-				sumatoria += atof(digito.valor);
-				nDigitos++;
-			}
-		
-		}while(atoi(digito.valor)==0);
-		
-		
-		printf(" \n %cDeseas continuar%c, presione F para Finalizar , cualquier otra tecla para finalizar: ",168,63);
-		scanf(" %c", &strFlag); 
-		
-		centerTitle("- Calculadora de promedio de ");
-		printf("%d digitos -",nDigitos);
-		
-	}while(strFlag != 'F');
+		if(atoi(diaSemana.valor)<1 || atoi(diaSemana.valor)>7){
+			printf(" El valor debe de ser desde 1 hasta 7, intenta nuevamente");
+			getchar();getchar();
+		}
+	}while(atoi(diaSemana.valor)<1 || atoi(diaSemana.valor)>7);
 	
 	//Codificación específica
+	int diaNumerico = atoi(diaSemana.valor);
 	
-	struct dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
-
-	float result = sumatoria/(nDigitos);
-	
-	printf("Valor final: %0.4f",result);
-	
+	struct dataCord resultadoLine = { 1, 5 }; gotoxy(&resultadoLine);
+	printf("El dia de la semana es ");
+	switch(diaNumerico){
+		
+		case 1:
+			printf("Lunes!");
+		break;
+		
+		case 2:
+			printf("Martes!");
+		break;
+		
+		case 3:
+			printf("Miercoles!");
+		break;
+		
+		case 4:
+			printf("Jueves!");
+		break;
+		
+		case 5:
+			printf("Viernes!");
+		break;
+		
+		case 6:
+			printf("Sabado!");
+		break;
+		
+		case 7:
+			printf("Domingo!");
+		break;
+		
+		default:
+			printf("Has sobrepasado la validacion!!");
+		break;
+		
+	}
  }

@@ -1,8 +1,6 @@
-//Ej 05: Promedio de cierto número de datos, hasta que el usuario que imprima una cadena específica.
-
+//Ej 08: Calificación del 1 al 10 entera, y distribuye entre A y F, usando un switch?
 #include <stdio.h>  
 #include <stdlib.h>
-#include <string.h>
 #include <windows.h>
 
 const bool entero = false;
@@ -46,7 +44,7 @@ struct CampoDeInformacion{
  
  void centerTitle(char tituloPrincipal[]){
  	
- 	int cordX = (110 - strlen(tituloPrincipal))/2;
+ 	int cordX = (120 - strlen(tituloPrincipal))/2;
  	
  	struct dataCord titulo = { cordX, 1 };
  	
@@ -113,7 +111,7 @@ void capturarDato(struct CampoDeInformacion *data){
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
 	 					
-						capturarDato(data);   
+						 (data);   
 					}
 				}
 					
@@ -137,50 +135,51 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion digito = {
+	struct CampoDeInformacion calificacion = {
 		{ 1, 3 },
-        "Ingresa valor a promediar: ",
+        "Ingresa tu calificacion (Rango del 0 al 100): ",
         NULL,
         entero,
-        negYpositivos
+        positivo
     };
+    
+    centerTitle("- Calculadora de la calificacion del estudiante -");
 	
-    centerTitle("- Calculadora de promedio -");
-	
-	char strFlag='W'; 
-	float sumatoria = 0;
-	int nDigitos = 0;
-	
-	do{ 
+	do{
+		capturarDato(&calificacion);
 		
-		do{
-			capturarDato(&digito);
-			
-			if(atoi(digito.valor) == 0){
-				printf("El valor no puede ser 0, intenta nuevamente! ");
-				getchar();getchar();
-			}else{
-				sumatoria += atof(digito.valor);
-				nDigitos++;
-			}
-		
-		}while(atoi(digito.valor)==0);
-		
-		
-		printf(" \n %cDeseas continuar%c, presione F para Finalizar , cualquier otra tecla para finalizar: ",168,63);
-		scanf(" %c", &strFlag); 
-		
-		centerTitle("- Calculadora de promedio de ");
-		printf("%d digitos -",nDigitos);
-		
-	}while(strFlag != 'F');
+		if(atoi(calificacion.valor)<0 || atoi(calificacion.valor)>100){
+			printf(" El valor debe de ser desde 0 hasta 100, intenta nuevamente");
+			getchar();getchar();
+		}
+	}while(atoi(calificacion.valor)<0 || atoi(calificacion.valor)>100);
 	
 	//Codificación específica
+	int calificacionNum = atoi(calificacion.valor);
 	
-	struct dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
+	struct dataCord resultadoLine = { 1, 5 }; gotoxy(&resultadoLine);
+	printf("La calificacion del estudiante es: ");
+	
+	switch(calificacionNum / 10) {
+        case 10:
+        	printf("A+");
+            break;
+        case 9:
+            printf("A");
+            break;
+        case 8:
+            printf("B");
+            break;
+        case 7:
+            printf("C");
+            break;
+        case 6:
+            printf("D");
+            break;
+        default:
+            printf("F");
+            break;
+    }
 
-	float result = sumatoria/(nDigitos);
-	
-	printf("Valor final: %0.4f",result);
-	
+    return 0;
  }

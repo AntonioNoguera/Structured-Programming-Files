@@ -1,8 +1,7 @@
-//Ej 05: Promedio de cierto número de datos, hasta que el usuario que imprima una cadena específica.
+//Ej 06: Escribe un programa que realice un conteo regresivo desde un número entero ingresado hasta 1
 
 #include <stdio.h>  
 #include <stdlib.h>
-#include <string.h>
 #include <windows.h>
 
 const bool entero = false;
@@ -46,7 +45,7 @@ struct CampoDeInformacion{
  
  void centerTitle(char tituloPrincipal[]){
  	
- 	int cordX = (110 - strlen(tituloPrincipal))/2;
+ 	int cordX = (120 - strlen(tituloPrincipal))/2;
  	
  	struct dataCord titulo = { cordX, 1 };
  	
@@ -113,7 +112,7 @@ void capturarDato(struct CampoDeInformacion *data){
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
 	 					
-						capturarDato(data);   
+						 (data);   
 					}
 				}
 					
@@ -137,50 +136,33 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion digito = {
+	struct CampoDeInformacion cuenta = {
 		{ 1, 3 },
-        "Ingresa valor a promediar: ",
+        "Ingresa los datos para la cuenta regresiva: ",
         NULL,
         entero,
-        negYpositivos
+        positivo
     };
+    
+    centerTitle("- Cuenta Regresiva -");
 	
-    centerTitle("- Calculadora de promedio -");
-	
-	char strFlag='W'; 
-	float sumatoria = 0;
-	int nDigitos = 0;
-	
-	do{ 
+	do{
+		capturarDato(&cuenta);
 		
-		do{
-			capturarDato(&digito);
-			
-			if(atoi(digito.valor) == 0){
-				printf("El valor no puede ser 0, intenta nuevamente! ");
-				getchar();getchar();
-			}else{
-				sumatoria += atof(digito.valor);
-				nDigitos++;
-			}
-		
-		}while(atoi(digito.valor)==0);
-		
-		
-		printf(" \n %cDeseas continuar%c, presione F para Finalizar , cualquier otra tecla para finalizar: ",168,63);
-		scanf(" %c", &strFlag); 
-		
-		centerTitle("- Calculadora de promedio de ");
-		printf("%d digitos -",nDigitos);
-		
-	}while(strFlag != 'F');
+		if(atoi(cuenta.valor)==0){
+			printf("El valor no puede ser 0, intenta nuevamente! ");
+			getchar();getchar();
+		}
+	}while(atoi(cuenta.valor)==0);
 	
 	//Codificación específica
+	int cuentas = atoi(cuenta.valor);
 	
-	struct dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
-
-	float result = sumatoria/(nDigitos);
+	for(int i = cuentas; i > 0; i--){
+		struct dataCord resultadoLine = { 1, 5 }; gotoxy(&resultadoLine);
+		printf("Numero %d!!",i);
+		Sleep(1000);
+	}
 	
-	printf("Valor final: %0.4f",result);
-	
+	printf("\n\n Cuenta Finalizada!");
  }

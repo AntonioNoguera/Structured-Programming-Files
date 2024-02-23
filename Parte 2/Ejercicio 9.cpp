@@ -1,8 +1,7 @@
-//Ej 05: Promedio de cierto número de datos, hasta que el usuario que imprima una cadena específica.
+//Ej 09: Pedir un número de mes, y mediantes un switch desplegar el número de días que contiene
 
 #include <stdio.h>  
 #include <stdlib.h>
-#include <string.h>
 #include <windows.h>
 
 const bool entero = false;
@@ -46,7 +45,7 @@ struct CampoDeInformacion{
  
  void centerTitle(char tituloPrincipal[]){
  	
- 	int cordX = (110 - strlen(tituloPrincipal))/2;
+ 	int cordX = (120 - strlen(tituloPrincipal))/2;
  	
  	struct dataCord titulo = { cordX, 1 };
  	
@@ -113,7 +112,7 @@ void capturarDato(struct CampoDeInformacion *data){
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
 	 					
-						capturarDato(data);   
+						 (data);   
 					}
 				}
 					
@@ -137,50 +136,54 @@ void capturarDato(struct CampoDeInformacion *data){
  
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion digito = {
+	struct CampoDeInformacion diaMes = {
 		{ 1, 3 },
-        "Ingresa valor a promediar: ",
+        "Ingresa el numero al mes (1-12): ",
         NULL,
         entero,
-        negYpositivos
+        positivo
     };
+    
+    centerTitle("- Calculadora del numero de dias dado un mes -");
 	
-    centerTitle("- Calculadora de promedio -");
-	
-	char strFlag='W'; 
-	float sumatoria = 0;
-	int nDigitos = 0;
-	
-	do{ 
+	do{
+		capturarDato(&diaMes);
 		
-		do{
-			capturarDato(&digito);
-			
-			if(atoi(digito.valor) == 0){
-				printf("El valor no puede ser 0, intenta nuevamente! ");
-				getchar();getchar();
-			}else{
-				sumatoria += atof(digito.valor);
-				nDigitos++;
-			}
-		
-		}while(atoi(digito.valor)==0);
-		
-		
-		printf(" \n %cDeseas continuar%c, presione F para Finalizar , cualquier otra tecla para finalizar: ",168,63);
-		scanf(" %c", &strFlag); 
-		
-		centerTitle("- Calculadora de promedio de ");
-		printf("%d digitos -",nDigitos);
-		
-	}while(strFlag != 'F');
+		if(atoi(diaMes.valor)<1 || atoi(diaMes.valor)>12){
+			printf(" El valor debe de ser desde 1 hasta 12, intenta nuevamente");
+			getchar();getchar();
+		}
+	}while(atoi(diaMes.valor)<1 || atoi(diaMes.valor)>12);
 	
 	//Codificación específica
+	int diaMesNum = atoi(diaMes.valor);
 	
-	struct dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
-
-	float result = sumatoria/(nDigitos);
+	struct dataCord resultadoLine = { 1, 5 }; gotoxy(&resultadoLine);
+	printf("El numero del dia del mes es ");
 	
-	printf("Valor final: %0.4f",result);
-	
+	switch(diaMesNum) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            printf("31");
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            printf("30");
+            break;
+        case 2:
+            printf("28 o 29");
+            break;
+        default:
+            printf("Número de mes inválido. Por favor, ingrese un número del 1 al 12.\n");
+            break;
+    }
+    
+    return 0;
  }
