@@ -1,4 +1,4 @@
-//Calculadora simple de dos números otorgados por el usuario
+//Numero de digitos
 
 #include <stdio.h>  
 #include <stdlib.h>

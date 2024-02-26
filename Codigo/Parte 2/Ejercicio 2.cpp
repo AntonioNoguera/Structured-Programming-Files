@@ -1,4 +1,4 @@
-//Calculadora simple de dos números otorgados por el usuario
+//Factorial de un numero
 
 #include <stdio.h>  
 #include <stdlib.h>
@@ -134,94 +134,29 @@ void capturarDato(struct CampoDeInformacion *data){
 	return ; 
  }
  
+ long int factorialRecursivo(int valorRecibido){
+	if(valorRecibido<1){
+		return 1;
+	}else{
+	 	return valorRecibido * factorialRecursivo(valorRecibido-1);
+	}
+ }
+ 
  int main(){  
 	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion valorA = {
+	struct CampoDeInformacion valorIngresado = {
 		{ 1, 3 },
-        "Ingrese el primer valor: ",
-        NULL,
-        decimal,
-        negYpositivos
-    };
-    
-    struct CampoDeInformacion valorB = {
-		{ 1, 5 },
-        "Ingrese el segundo valor: ",
-        NULL,
-        decimal,
-        negYpositivos
-    };
-	
-	struct CampoDeInformacion opcionSelected = {
-		{ 1, 7 },
-        "Ingrese la operacion a realizar 0) SUMA, 1) RESTA, 2)MULTIPLICACION, 3)DIVISION: ",
+        "Ingrese el numero del cual desea conocer su factorial: ",
         NULL,
         entero,
         positivo
     };
-    
-    centerTitle("- Calculadora sencilla entre dos valores -");
+  
+    centerTitle("- Factorial de un numero -");
 	
-	
-	capturarDato(&valorA);
-	
-	capturarDato(&valorB);
-	
-	do{
-		capturarDato(&opcionSelected);
+	capturarDato(&valorIngresado);
 		
-		if(atoi(opcionSelected.valor)<0 || atoi(opcionSelected.valor)>3){
-			printf("La opcion seleccionada solo puede estar entre 0 y 3, intentalo nuevamente");
-			getchar();getchar();
-		}
-	}while(atoi(opcionSelected.valor)<0 || atoi(opcionSelected.valor)>3);
-	
-	
-	
 	//Codificación específica
-	
-	float float_valorA = atof(valorA.valor);
-	float float_valorB = atof(valorB.valor);
-	float resultado;
-	
-	struct dataCord resultadoLine = { 1, 9 }; gotoxy(&resultadoLine);
-	
-	switch(atoi(opcionSelected.valor)){
-		case 0:
-			//SUMA
-			resultado = float_valorA + float_valorB;
-			printf("El resultado de la suma es %0.2f",resultado);
-		
-		break;
-		
-		case 1:
-			//RESTA
-			resultado = float_valorA - float_valorB;
-			printf("El resultado de la resta es %0.2f",resultado);
-		
-		break;
-			
-		case 2:
-			//MULTIPLICACIÓN
-			resultado = float_valorA * float_valorB;
-			printf("El resultado de la multiplicacion es %0.2f",resultado);
-		
-		break;
-			
-		case 3:
-			//DIVISION
-			if(float_valorB!=0){
-				resultado = float_valorA / float_valorB;
-				printf("El resultado de la division es %0.2f",resultado);
-			}else{
-				printf("El resultado de la division es indeterminado, intenta con un denominador distinto de 0");
-			}
-			
-		break;
-			
-		default:
-			printf("Somehow you passed the option validation, impresive");
-		break;
-	}
-		
+	printf("El resultado del factorial es %d",factorialRecursivo(atoi(valorIngresado.valor)));
+
  }
