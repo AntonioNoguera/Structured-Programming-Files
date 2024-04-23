@@ -54,6 +54,7 @@ struct CampoDeInformacion{
  
 
 void errorDeValidacion(struct dataCord *cords, char mensajeError[]){ 
+	clearLine(cords);
 	gotoxy(cords);
 	printf("%s",mensajeError);
 	getchar();
@@ -110,7 +111,7 @@ void capturarDato(struct CampoDeInformacion *data){
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
 	 					
-						 (data);   
+						capturarDato(data);   
 					}
 				}
 					

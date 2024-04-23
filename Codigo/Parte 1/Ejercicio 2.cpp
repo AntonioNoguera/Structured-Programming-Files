@@ -56,6 +56,7 @@ struct CampoDeInformacion{
  
 
 void errorDeValidacion(struct dataCord *cords, char mensajeError[]){ 
+	clearLine(cords);
 	gotoxy(cords);
 	printf("%s",mensajeError);
 	getchar();

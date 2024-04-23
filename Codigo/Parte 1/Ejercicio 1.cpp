@@ -8,8 +8,9 @@
 const bool entero = false;
 const bool decimal = true;
 
-const bool soloPositivos = true;
-const bool negYpositivos = false;
+const bool positivo = false;
+const bool negYpositivos = true;
+
 
 // Main Structures
 struct dataCord{
@@ -56,6 +57,7 @@ struct CampoDeInformacion{
  
 
 void errorDeValidacion(struct dataCord *cords, char mensajeError[]){ 
+	clearLine(cords);
 	gotoxy(cords);
 	printf("%s",mensajeError);
 	getchar();
@@ -111,8 +113,7 @@ void capturarDato(struct CampoDeInformacion *data){
 				}else{
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
-	 					
-						 (data);   
+						capturarDato(data);   
 					}
 				}
 					
@@ -125,6 +126,7 @@ void capturarDato(struct CampoDeInformacion *data){
     data->valor = (char *)malloc(strlen(strHelper) + 1); // +1 para el carácter nulo
     if (data->valor == NULL) {
         // Manejo de error si malloc falla
+        printf("Por aca?");
         exit(EXIT_FAILURE);
     }
     
@@ -143,7 +145,7 @@ void capturarDato(struct CampoDeInformacion *data){
         "Ingrese el valor de temperatura en grados Celsius: ",
         NULL,
         decimal,
-        false
+        negYpositivos
     };
     
     
@@ -152,11 +154,12 @@ void capturarDato(struct CampoDeInformacion *data){
 	do{
 		capturarDato(&mainMonto); 
 		
-		if(atof(mainMonto.valor)<0 || atof(mainMonto.valor)>100){
+		if(atof(mainMonto.valor)<-273.15 || atof(mainMonto.valor)>100){
 			printf("La temperatura puede estar en un rango de 0 hasta 100");
+			getchar();getchar();
 		}
 		
-	}while(atof(mainMonto.valor)<0 || atof(mainMonto.valor)>100);
+	}while(atof(mainMonto.valor)<-273.15 || atof(mainMonto.valor)>100);
 	
 	tempFarenheit = (atof(mainMonto.valor) * (1.8)) + 32;
 	
