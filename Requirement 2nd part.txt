@@ -1,26 +1,26 @@
 Parte 3
 
-Crea una función para cada operación aritmética (suma, resta, multiplicación, división) y permite al usuario realizar cálculos entre 2 números.​
+1 Crea una función para cada operación aritmética (suma, resta, multiplicación, división) y permite al usuario realizar cálculos entre 2 números.​
 
-Solicita el radio al usuario y crea una función que nos de como resultado el área y el perímetro de un círculo. ​
+2 Solicita el radio al usuario y crea una función que nos de como resultado el área y el perímetro de un círculo. ​
 
-Solicita al usuario 10 números y crea una función para calcular el promedio de estos números.​
+3 Solicita al usuario 10 números y crea una función para calcular el promedio de estos números.​
 
-Solicita al usuario la temperatura en grados Celsius  y crea una función para convertir estas unidades a grados Fahrenheit.​
+4 Solicita al usuario la temperatura en grados Celsius  y crea una función para convertir estas unidades a grados Fahrenheit.​
 
-Crea un programa que calcule el precio final de un producto con descuento mediante el uso de funciones, dada su tasa de descuento y precio original.​
+5 Crea un programa que calcule el precio final de un producto con descuento mediante el uso de funciones, dada su tasa de descuento y precio original.​
 
-Construye programa en C que, al recibir como dato un número entero N, calcule el factorial de dicho número mediante el uso de una función.​
+6 Construye programa en C que, al recibir como dato un número entero N, calcule el factorial de dicho número mediante el uso de una función.​
 
-Un individuo invierte en un banco un capital específico y quiere saber cuánto obtendrá al cabo de cierto tiempo, si el dinero se coloca a una determinada tasa de interés mensual. Escribe el programa correspondiente recuerda hacer uso de una función. 
+7 Un individuo invierte en un banco un capital específico y quiere saber cuánto obtendrá al cabo de cierto tiempo, si el dinero se coloca a una determinada tasa de interés mensual. Escribe el programa correspondiente recuerda hacer uso de una función. 
 
 Parte 4
-Escribe un programa que calcule el promedio de un arreglo de números. Utiliza una función para la lectura de datos y otra función para calcular el promedio.​
+1.- Escribe un programa que calcule el promedio de un arreglo de números. Utiliza una función para la lectura de datos y otra función para calcular el promedio.​
 
-Realiza la suma de dos arreglos ingresados por el usuario mediante el uso de funciones.​
+2.- Realiza la suma de dos arreglos ingresados por el usuario mediante el uso de funciones.​
 
-Crea un programa que realice la búsqueda de un elemento en un arreglo. Utiliza una función para buscar el elemento y retorna la posición si se encuentra o -1 si no está presente. La función debe recibir el arreglo, el tamaño y el valor a buscar.​
+3.- Crea un programa que realice la búsqueda de un elemento en un arreglo. Utiliza una función para buscar el elemento y retorna la posición si se encuentra o -1 si no está presente. La función debe recibir el arreglo, el tamaño y el valor a buscar.​
 
-Desarrolla un programa que calcule el producto de dos matrices bidimensionales. Utiliza funciones para la lectura de matrices, el cálculo del producto y la impresión del resultado.​
+4.- Desarrolla un programa que calcule el producto de dos matrices bidimensionales. Utiliza funciones para la lectura de matrices, el cálculo del producto y la impresión del resultado.​
 
-Escribe un programa que calcule el promedio de cada columna en una matriz bidimensional. Utiliza funciones para la lectura de la matriz y el cálculo del promedio, y luego imprime los resultados.
+5.- Escribe un programa que calcule el promedio de cada columna en una matriz bidimensional. Utiliza funciones para la lectura de la matriz y el cálculo del promedio, y luego imprime los resultados.

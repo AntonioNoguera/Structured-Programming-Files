@@ -3,6 +3,14 @@
 #include <stdlib.h>
 #include <windows.h>
 
+void sumarArreglos () {
+	
+}
+
+void generarArreglo () {
+	
+}
+
 int main(){  
 	//Definición de los tipos de datos requeridos
 	CampoDeInformacion precio = {
@@ -49,30 +57,8 @@ int main(){
 	//Codificación específica
 	
 	float precioCrudo = atof(precio.valor);
-	int numUsuario = atoi(tipoUsuario.valor);
-	
-	dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
-	printf("El precio para el usuario ");
-	
-	switch(numUsuario) {
-        case 1:
-        	printf("no afiliado %0.4f, no hay descuento",precioCrudo);
-            break;
-            
-        case 2:
-        	precioCrudo = precioCrudo - precioCrudo*.10;
-        	printf("afiliado %0.4f, descuento de 10%c",precioCrudo,37);
-            break;
-            
-        case 3: 
-        	precioCrudo = precioCrudo - precioCrudo*.30;
-        	printf("ejecutivo %0.4f , descuento de 30%c",precioCrudo,37);
-            break;
-            
-        default:
-            printf("Sobrepasaste la validacion increible!");
-            break;
-    }
+	int numUsuario = atoi(tipoUsuario.valor); 
+	 
     
     return 0;
 }

@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <windows.h>
 
+int searchArrayValue() {
+	
+}
+
 int main(){  
 	//Definición de los tipos de datos requeridos
 	CampoDeInformacion precio = {

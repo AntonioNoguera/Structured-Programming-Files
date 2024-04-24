@@ -3,6 +3,15 @@
 #include <stdio.h>  
 #include <stdlib.h>
 #include <windows.h>
+
+void promedioColumna(){
+	
+}
+
+void leerMatriz(){
+	
+}
+
 int main(){  
 	//Definición de los tipos de datos requeridos
 	CampoDeInformacion precio = {
