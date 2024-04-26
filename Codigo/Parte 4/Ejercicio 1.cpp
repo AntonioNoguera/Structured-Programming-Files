@@ -6,8 +6,14 @@
 
 #include "cUtils.h"
 
-void calcularPromedio() {
+float promediarArreglo(int array[], int arraySize) {
+	float finalProm = 0;
 	
+	for(int i=0; i < arraySize; i++){
+		finalProm += array[i];
+	}
+	
+	return finalProm/arraySize;
 }
 
 void capturarValores(int array[], int arraySize) {
@@ -17,7 +23,7 @@ void capturarValores(int array[], int arraySize) {
 	        "Ingresa el valor del arreglo: ",
 	        NULL,
 	        entero,
-	        positivo
+	        negYpositivos
 		};
 		
 		capturarDato(&elementoArray);
@@ -54,9 +60,9 @@ int main(){
 	
 	capturarValores(array, arraySize);
 	
-	for(int i=0; i<atoi(arregloSize.valor); i++){
-		printf("%d ",array[i]);
-	}
+	float promedio = promediarArreglo(array, arraySize);
+	
+	printf("\n El promedio del arreglo capturado equivale a %0.2f",promedio);
 	  
 	
     return 0;
