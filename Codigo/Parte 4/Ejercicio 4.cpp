@@ -1,72 +1,69 @@
 //Ej4.- Desarrolla un programa que calcule el producto de dos matrices bidimensionales. 
-//Utiliza funciones para la lectura de matrices, el cálculo del producto y la impresión del resultado.?
-#include <stdio.h>  
+//Utiliza funciones para la lectura de matrices, el cálculo del producto y la impresión del resultado.
+#include <stdio.h> 
 #include <stdlib.h>
 #include <windows.h>
 
-void imprimirMatriz() {
+#include "cUtils.h"
+
+int bDimention = 4;
+
+void multiplicarMatrices(int matA[][bDimention], int matB[][bDimention], int matB[][bDimention], int size) { 
 	
 }
 
-void calculoDeProducto(){
-	
-}
-
-void leerMatriz(){
-	
+void capturarValores(int array[][bDimention], int arraySize) {
+	for(int i = 0; i<arraySize; i++){
+		CampoDeInformacion elementoArray = {
+			{ 1, ((2*i) + 6 )},
+	        "Ingresa el valor del arreglo: ",
+	        NULL,
+	        entero,
+	        negYpositivos
+		};
+		
+		capturarDato(&elementoArray);
+	 
+		array[i] = atoi(elementoArray.valor);
+	}
 }
 
 int main(){  
 	//Definición de los tipos de datos requeridos
-	CampoDeInformacion precio = {
+	CampoDeInformacion dimensionMatriz = {
 		{ 1, 3 },
-        "Ingresa el precio del producto: ",
-        NULL,
-        decimal,
-        positivo
-    };
-    
-    CampoDeInformacion tipoUsuario = {
-		{ 1, 5 },
-        "Ingresa el tipo de usuario 1 = No afiliado, 2 = Afiliado, 3 = Ejecutivo: ",
+        "Ingresa la dimension de tus matrices cuadradas: ",
         NULL,
         entero,
         positivo
     };
-    
-    centerTitle("- Calculadora del precio final de un producto, dado un tipo de usuario -");
-	
+     
+    centerTitle("- Multiplicacion de dos matrices de mismo orden -");
 	
 	//Validacion Específica
 	do{
-		capturarDato(&precio);
+		capturarDato(&dimensionMatriz);
 		
-		if(atof(precio.valor)==0){
-			printf(" El precio no puede ser 0.");
+		if(atof(dimensionMatriz.valor) == 0) {
+			printf(" El tama%co de la matriz no puede ser 0.",164);
 			getchar();getchar();
 		}
-	}while(atof(precio.valor)==0);
-	
-	//Validdacion Especifica!
-	do{
-		capturarDato(&tipoUsuario);
 		
-		if(atoi(tipoUsuario.valor)<1 || atoi(tipoUsuario.valor)>3){
-			printf(" El valor debe de ser desde 1 hasta 3, intenta nuevamente");
-			getchar();getchar();
-		}
-	}while(atoi(tipoUsuario.valor)<1 || atoi(tipoUsuario.valor)>3);
+	}while(atof(dimensionMatriz.valor)==0);
+	
+	bDimention = atoi(dimensionMatriz.valor);
+	
+	int dMatriz = atoi(dimensionMatriz.valor);
+	
+	int matrizA[dMatriz][dMatriz], matrizB[dMatriz][dMatriz], matrizC[dMatriz][dMatriz]; 
+	
+	capturarMatriz(matrizA, dMatriz); 
+	capturarMatriz(matrizB, dMatriz); 
 	
 	
-	
-	//Codificación específica
-	
-	float precioCrudo = atof(precio.valor);
-	int numUsuario = atoi(tipoUsuario.valor);
-	
-	dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
-	printf("El precio para el usuario ");
-	 
-    
+	//multiplicarMatrices(matrizA, matrizB, matrizC, dMatriz);
+	     
+//	printf("\n La posicion en el arreglo es: %d , (recordar que la primer posicion es 0)",sentinelSearch(array, arraySize, atoi(target.valor)));
+	  
     return 0;
- }
+}

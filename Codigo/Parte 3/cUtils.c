@@ -1,42 +1,32 @@
-//Ej 06: Escribe un programa que realice un conteo regresivo desde un número entero ingresado hasta 1
+// Main Structures 
+// Visual UI functions
 
-#include <stdio.h>  
-#include <stdlib.h>
-#include <windows.h>
-
-const bool entero = false;
-const bool decimal = true;
-
-const bool positivo = false;
-const bool negYpositivos = true;
-
-// Main Structures
-struct dataCord{
+typedef struct {
 	int x;
 	int y;
-};
+} dataCord;
 
-struct CampoDeInformacion{
-	struct dataCord dataCord;
+typedef struct {
+	dataCord dataCord;
 	char fallbackString[100];
 	char *valor;
 	bool permiteDecimal;
 	bool permiteNegativ;
-};
+} CampoDeInformacion;
 
-// Visual UI functions
- void gotoxy(struct dataCord *data){  
+
+ void gotoxy(dataCord *data){  
 	//Funcion fuera de mi autoria
 	//no funciona Conio2.h y no recuerdo como se implementaba en devC xd
 	HANDLE hcon;  
 	hcon = GetStdHandle(STD_OUTPUT_HANDLE);  
 	COORD dwPos;  
-	dwPos.X = data->x;  
-	dwPos.Y = data->y;  
+	dwPos.X = data -> x;  
+	dwPos.Y = data -> y;  
 	SetConsoleCursorPosition(hcon,dwPos);  
  }
  
- void clearLine(struct dataCord *cords){
+ void clearLine(dataCord *cords){
 	gotoxy(cords);
 	for(int i=0;i<500;i++){
 		printf("%c",32);
@@ -47,14 +37,14 @@ struct CampoDeInformacion{
  	
  	int cordX = (120 - strlen(tituloPrincipal))/2;
  	
- 	struct dataCord titulo = { cordX, 1 };
+ 	dataCord titulo = { cordX, 1 };
  	
  	gotoxy(&titulo);
  	printf("%s",tituloPrincipal); 
  }
  
 
-void errorDeValidacion(struct dataCord *cords, char mensajeError[]){ 
+void errorDeValidacion(dataCord *cords, char mensajeError[]){ 
 	clearLine(cords);
 	gotoxy(cords);
 	printf("%s",mensajeError);
@@ -63,7 +53,7 @@ void errorDeValidacion(struct dataCord *cords, char mensajeError[]){
 }
 
 // General Validation Function
-void capturarDato(struct CampoDeInformacion *data){
+void capturarDato(CampoDeInformacion *data){
  	static char strHelper[100];
  	
  	int pointCount = 0;
@@ -112,57 +102,22 @@ void capturarDato(struct CampoDeInformacion *data){
 					if(++dashCount > 1){ 
 						errorDeValidacion(&data -> dataCord, "El formato del numero debe ser congruente. Multiples '-' encontrados .");
 	 					
-						 capturarDato(data);   
+						capturarDato(data);   
 					}
 				}
 					
 			}
 		}
 	}
-	
-	// Pendiente regvisar
-	// Asignar memoria dinámica para almacenar el valor ingresado
-    data->valor = (char *)malloc(strlen(strHelper) + 1); // +1 para el carácter nulo
-    if (data->valor == NULL) {
-        // Manejo de error si malloc falla
+	 
+    data->valor = (char *)malloc(strlen(strHelper) + 1);
+    if (data->valor == NULL) { 
         exit(EXIT_FAILURE);
     }
     
-    // Copiar el valor ingresado en el espacio de memoria asignado
     strcpy(data->valor, strHelper);
 
 	return ; 
  }
  
- int main(){  
-	//Definición de los tipos de datos requeridos
-	struct CampoDeInformacion cuenta = {
-		{ 1, 3 },
-        "Ingresa los datos para la cuenta regresiva: ",
-        NULL,
-        entero,
-        positivo
-    };
-    
-    centerTitle("- Cuenta Regresiva -");
-	
-	do{
-		capturarDato(&cuenta);
-		
-		if(atoi(cuenta.valor)==0){
-			printf("El valor no puede ser 0, intenta nuevamente! ");
-			getchar();getchar();
-		}
-	}while(atoi(cuenta.valor)==0);
-	
-	//Codificación específica
-	int cuentas = atoi(cuenta.valor);
-	
-	for(int i = cuentas; i > 0; i--){
-		struct dataCord resultadoLine = { 1, 5 }; gotoxy(&resultadoLine);
-		printf("Numero %d!!",i);
-		Sleep(1000);
-	}
-	
-	printf("\n\n Cuenta Finalizada!");
- }
+  
