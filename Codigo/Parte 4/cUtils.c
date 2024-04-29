@@ -61,7 +61,10 @@ void capturarDato(CampoDeInformacion *data){
  	
  	//clean line
  	gotoxy(&data->dataCord);
-	clearLine(&data->dataCord); 
+ 	if(strlen(data->	fallbackString) != 0){ 
+	 clearLine(&data->dataCord); 
+	}
+	
  	
  	//print n capture
 	gotoxy(&data -> dataCord);

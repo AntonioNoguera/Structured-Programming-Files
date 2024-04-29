@@ -1,10 +1,23 @@
 //Ej4.- Desarrolla un programa que calcule el producto de dos matrices bidimensionales. 
 //Utiliza funciones para la lectura de matrices, el cálculo del producto y la impresión del resultado.
+
+//Posibles mejoras, manejo de fallback mas complejo, y no unicamente desactivarlo.
 #include <stdio.h> 
 #include <stdlib.h>
 #include <windows.h>
 
 #include "cUtils.h" 
+
+void imprimirMatriz(int** matriz, int dimension){
+	
+	printf("\n Resultado Final");
+	for(int i=0; i<dimension; i++){
+		printf("\n\nColumna %d:  ",i);
+		for(int j=0; j<dimension; j++){
+			printf("%d  ",matriz[i][j]);
+		}
+	}
+}
 
 int** liberarMemoria(int** matriz , int dimensiones) {
 	
@@ -15,37 +28,43 @@ int** liberarMemoria(int** matriz , int dimensiones) {
     free(matriz);
 }
 
-int** capturarValores(int** matriz , int dimensiones) {
+int** capturarValores(int** matriz , int dimensiones, int nMatriz) {
 	
 	for (int i = 0; i < dimensiones; i++) {
         for (int j = 0; j < dimensiones; j++) {
-            matriz[i][j] = i + j; 
-            printf("%2d ", matriz[i][j]);
-        }
-        printf("\n");
+        	
+        	CampoDeInformacion datoMatriz = {
+				{ 1 + i*4, j*2 +6 + (2*dimensiones*nMatriz) },
+		        "",
+		        NULL,
+		        entero,
+		        negYpositivos
+		    };
+		    
+        	capturarDato(&datoMatriz);
+        	
+            matriz[i][j] = atoi(datoMatriz.valor); 
+        } 
     }
     
     return matriz;
 }
 
-
-int** crearMatriz(int numFilas, int numColumnas) {
+int** crearMatriz(int numFilas, bool leerValores, int nMatriz) {
     int **matriz;
     int i;
-
-    // Asignar memoria para el arreglo de punteros (filas)
-    matriz = (int**) malloc(numFilas * sizeof(int*));  // Cast explícito necesario en C++ 
+    
+    matriz = (int**) malloc(numFilas * sizeof(int*));
     if (matriz == NULL) {
         fprintf(stderr, "Error de asignación de memoria para las filas\n");
         return NULL;
     }
-
-    // Asignar memoria para cada fila
+    
     for (i = 0; i < numFilas; i++) {
-        matriz[i] = (int*) malloc(numColumnas * sizeof(int));  // Cast explícito necesario en C++
+        matriz[i] = (int*) malloc(numFilas * sizeof(int)); 
         if (matriz[i] == NULL) {
             fprintf(stderr, "Error de asignación de memoria para la fila %d\n", i);
-            // Liberar memoria asignada hasta el momento antes de salir
+            
             for (int k = 0; k < i; k++) {
                 free(matriz[k]);
             }
@@ -54,10 +73,35 @@ int** crearMatriz(int numFilas, int numColumnas) {
         }
     }
 
-    return capturarValores(matriz, numFilas);
+	if(leerValores){
+		return capturarValores(matriz, numFilas,nMatriz);	
+	}else{
+		return matriz;
+	}
+	
 }
 
-
+int** multiplicarMatrices(int** matrizA, int** matrizB,  int dimensionMatriz){
+	int **matrizResultante = crearMatriz(dimensionMatriz,false,0);
+	
+	
+	for(int i=0; i<dimensionMatriz; i++){
+		for(int j=0; j<dimensionMatriz; j++){
+			int final = 0;
+			
+			//For para calcular el producto de vectores
+			for(int w = 0; w<dimensionMatriz; w++){
+				final += matrizA[w][j] * matrizB[j][w];
+			}
+			
+			
+				printf("\n\nResultado de la columna %d / %d = %d",i,j,final);
+			matrizResultante[i][j] = final;
+		}
+	}
+	
+	return matrizResultante;
+}
 
 int main(){  
 	//Definición de los tipos de datos requeridos
@@ -85,23 +129,11 @@ int main(){
 	
 	int dimensionCast = atoi(dimensionMatriz.valor);
 	
-	int **matrizA = crearMatriz(dimensionCast, dimensionCast);
-	//int **matrizB = crearMatriz(dimensionCast);
+	int **matrizA = crearMatriz(dimensionCast,true,0);
+	int **matrizB = crearMatriz(dimensionCast,true,1); 
+	int **matrizC =	multiplicarMatrices(matrizA, matrizA, dimensionCast);
 	
-	//int **matrizC;
-	
-	/*
-	int dMatriz = atoi(dimensionMatriz.valor);
-	
-	int matrizA[dMatriz][dMatriz], matrizB[dMatriz][dMatriz], matrizC[dMatriz][dMatriz]; 
-	
-	capturarMatriz(matrizA, dMatriz); 
-	capturarMatriz(matrizB, dMatriz); 
-	
-	*/
-	//multiplicarMatrices(matrizA, matrizB, matrizC, dMatriz);
-	     
-//	printf("\n La posicion en el arreglo es: %d , (recordar que la primer posicion es 0)",sentinelSearch(array, arraySize, atoi(target.valor)));
-	  
+	//imprimirMatriz(matrizA, dimensionCast);
+		  
     return 0;
 }
