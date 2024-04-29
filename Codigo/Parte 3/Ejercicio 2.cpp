@@ -1,83 +1,40 @@
 //Ej2  Solicita el radio al usuario y crea una función que nos de 
 // como resultado el área y el perímetro de un círculo. 
-
 #include <stdio.h>  
 #include <stdlib.h>
 #include <windows.h>
 
 #include "cUtils.h"
 
+const float pi = 3.14159265359;
 
-
-float funcionPerimetroArea(){
+float funcionPerimetroArea(float radio, float *perimetro, float *area){
+	*perimetro = pi * (2*radio);
 	
+	*area = pi* (radio * radio);
 }
 
 int main(){  
 	//Definición de los tipos de datos requeridos
-	CampoDeInformacion argumentoA = {
+	CampoDeInformacion radio = {
 		{ 1, 3 },
         "Ingresa el numero de valores en tu arreglo: ",
         NULL,
         entero,
         positivo
     };
-    
-    CampoDeInformacion argumentoB = {
-		{ 1, 5 },
-        "Ingresa el numero de valores en tu arreglo: ",
-        NULL,
-        entero,
-        negYpositivos
-    };
-    
+     
     centerTitle("- Operaciones entre dos numeros usando funciones -");
     
-    capturarDato(&argumentoA);
-    capturarDato(&argumentoB);
+    capturarDato(&radio); 
     
-	
-	//Validacion Específica
-	do{
-		capturarDato(&operacion);
-		
-		if(atof(operacion.valor)<0 || atof(operacion.valor)>3){
-			printf(" El tama%co del arreglo no puede ser 0.",164);
-			getchar();getchar();
-			
-		}
-	}while(atof(operacion.valor)<0 || atof(operacion.valor)>3);
-	
-	int operacionSeleccionada = atoi(operacion.valor);
-	
-	float argA = atof(argumentoA.valor);
-	float argB = atof(argumentoB.valor);
-	
-	
-	float resultado = 0;
-	
-	switch (operacionSeleccionada) {
-		case 0:
-			resultado = suma(argA,argB);
-			break;
-			
-		case 1:
-			resultado = resta(argA,argB);
-			break;
-
-		case 2:
-			resultado = multiplicacion(argA,argB);
-			break;
-			
-		case 3:
-			resultado = division(argA,argB);
-			break;
-			
-		default: 
-			break;
-	}
+    float perimetro = 0, area = 0;
 	 
-	printf("\n El resultado de la operacion es: %0.2f",resultado);
+	float radioCasted = atof(radio.valor); 
+	
+	funcionPerimetroArea(radioCasted, &perimetro, &area);
+	
+	printf("\n Con el Radio %0.4f tu perimetro es: %0.4f y el area: %0.4f",radioCasted, perimetro, area);
 	  
     return 0;
 }

@@ -4,29 +4,60 @@
 #include <stdlib.h>
 #include <windows.h>
 
-#include "cUtils.h"
+#include "cUtils.h" 
 
-int bDimention = 4;
-
-void multiplicarMatrices(int matA[][bDimention], int matB[][bDimention], int matB[][bDimention], int size) { 
+int** liberarMemoria(int** matriz , int dimensiones) {
 	
+	for (int i = 0; i < dimensiones; i++) {
+        free(matriz[i]);
+    }
+    
+    free(matriz);
 }
 
-void capturarValores(int array[][bDimention], int arraySize) {
-	for(int i = 0; i<arraySize; i++){
-		CampoDeInformacion elementoArray = {
-			{ 1, ((2*i) + 6 )},
-	        "Ingresa el valor del arreglo: ",
-	        NULL,
-	        entero,
-	        negYpositivos
-		};
-		
-		capturarDato(&elementoArray);
-	 
-		array[i] = atoi(elementoArray.valor);
-	}
+int** capturarValores(int** matriz , int dimensiones) {
+	
+	for (int i = 0; i < dimensiones; i++) {
+        for (int j = 0; j < dimensiones; j++) {
+            matriz[i][j] = i + j; 
+            printf("%2d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return matriz;
 }
+
+
+int** crearMatriz(int numFilas, int numColumnas) {
+    int **matriz;
+    int i;
+
+    // Asignar memoria para el arreglo de punteros (filas)
+    matriz = (int**) malloc(numFilas * sizeof(int*));  // Cast explícito necesario en C++ 
+    if (matriz == NULL) {
+        fprintf(stderr, "Error de asignación de memoria para las filas\n");
+        return NULL;
+    }
+
+    // Asignar memoria para cada fila
+    for (i = 0; i < numFilas; i++) {
+        matriz[i] = (int*) malloc(numColumnas * sizeof(int));  // Cast explícito necesario en C++
+        if (matriz[i] == NULL) {
+            fprintf(stderr, "Error de asignación de memoria para la fila %d\n", i);
+            // Liberar memoria asignada hasta el momento antes de salir
+            for (int k = 0; k < i; k++) {
+                free(matriz[k]);
+            }
+            free(matriz);
+            return NULL;
+        }
+    }
+
+    return capturarValores(matriz, numFilas);
+}
+
+
 
 int main(){  
 	//Definición de los tipos de datos requeridos
@@ -51,8 +82,15 @@ int main(){
 		
 	}while(atof(dimensionMatriz.valor)==0);
 	
-	bDimention = atoi(dimensionMatriz.valor);
 	
+	int dimensionCast = atoi(dimensionMatriz.valor);
+	
+	int **matrizA = crearMatriz(dimensionCast, dimensionCast);
+	//int **matrizB = crearMatriz(dimensionCast);
+	
+	//int **matrizC;
+	
+	/*
 	int dMatriz = atoi(dimensionMatriz.valor);
 	
 	int matrizA[dMatriz][dMatriz], matrizB[dMatriz][dMatriz], matrizC[dMatriz][dMatriz]; 
@@ -60,7 +98,7 @@ int main(){
 	capturarMatriz(matrizA, dMatriz); 
 	capturarMatriz(matrizB, dMatriz); 
 	
-	
+	*/
 	//multiplicarMatrices(matrizA, matrizB, matrizC, dMatriz);
 	     
 //	printf("\n La posicion en el arreglo es: %d , (recordar que la primer posicion es 0)",sentinelSearch(array, arraySize, atoi(target.valor)));
