@@ -18,13 +18,13 @@ int main(){
 	//Definición de los tipos de datos requeridos
 	CampoDeInformacion radio = {
 		{ 1, 3 },
-        "Ingresa el numero de valores en tu arreglo: ",
+        "Ingresa el radio de tu circulo:  ",
         NULL,
         entero,
         positivo
     };
      
-    centerTitle("- Operaciones entre dos numeros usando funciones -");
+    centerTitle("- Calcular Area y Perimetro de un Circulo Usando Funciones -");
     
     capturarDato(&radio); 
     

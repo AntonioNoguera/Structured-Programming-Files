@@ -7,7 +7,7 @@
 #include "cUtils.h" 
 
 float DineroFinal(float dinero, float tiempo, float tasa){ 
-	return dinero * tiempo * (tasa/100);
+	return dinero * (1 + tiempo * (tasa/100));
 }
 
 int main(){  
@@ -15,7 +15,7 @@ int main(){
 	
 	CampoDeInformacion dinero = {
 		{ 1, 3 },
-        "Ingresa el numero a calcular el factorial: ",
+        "Ingresa la cantidad de dinero: ",
         NULL,
         entero,
         positivo
@@ -23,7 +23,7 @@ int main(){
 
 	CampoDeInformacion tiempo = {
 		{ 1, 5 },
-        "Ingresa el numero a calcular el factorial: ",
+        "Ingresa el numero de meses en el que se plantea invertir: ",
         NULL,
         entero,
         positivo
@@ -31,19 +31,19 @@ int main(){
     
     CampoDeInformacion tasa = {
 		{ 1, 7 },
-        "Ingresa el numero a calcular el factorial: ",
+        "Ingresa la tasa mensual de interes: ",
         NULL,
         entero,
         positivo
     };
 	     
-    centerTitle("- Calculadora Factorial -");
+    centerTitle("- Calculadora de capitual invertido -");
     
     capturarDato(&dinero);  
     capturarDato(&tiempo);  
     capturarDato(&tasa);  
 	 
-	printf("\n El factorial del valor es: %0.4f ",
+	printf("\n El Capital monetario final equivale a: %0.4f ",
 	
 	DineroFinal(
 		atof(dinero.valor),

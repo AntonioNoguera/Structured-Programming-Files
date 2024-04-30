@@ -14,7 +14,7 @@ int main(){
 	//Definición de los tipos de datos requeridos
 	CampoDeInformacion precio = {
 		{ 1, 3 },
-        "Ingresa el numero de valores a promediar: ",
+        "Ingresa el precio original del producto: ",
         NULL,
         entero,
         positivo
@@ -22,13 +22,13 @@ int main(){
     
     CampoDeInformacion descuento = {
 		{ 1, 5 },
-        "Ingresa el numero de valores a promediar: ",
+        "Ingresa la tasa de descuento: ",
         NULL,
         entero,
         positivo
     };
      
-    centerTitle("- Operaciones entre dos numeros usando funciones -");
+    centerTitle("- Precio Final de un producto -");
     
     capturarDato(&precio); 
 	capturarDato(&descuento);   

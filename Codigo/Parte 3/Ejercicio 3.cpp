@@ -14,7 +14,7 @@ float promedioDatos(int ndatos){
 		
 		CampoDeInformacion datoCapturado = {
 			{ 1, ((2*i) + 6 )},
-	        "Ingresa el valor del arreglo: ",
+	        "Ingresa tu valor: ",
 	        NULL,
 	        entero,
 	        negYpositivos
@@ -38,13 +38,13 @@ int main(){
         positivo
     };
      
-    centerTitle("- Operaciones entre dos numeros usando funciones -");
+    centerTitle("- Promedio de N datos -");
     
     capturarDato(&nDatos); 
      
 	int nDatosCasted = atoi(nDatos.valor); 
 	
-	printf("\n El promedio de estos datos es: %0.4f",promedioDatos(nDatosCasted));
+	printf("\n El promedio de los datos ingresados es: %0.4f",promedioDatos(nDatosCasted));
 	  
     return 0;
 }

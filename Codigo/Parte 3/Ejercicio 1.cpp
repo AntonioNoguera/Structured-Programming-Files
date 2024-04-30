@@ -30,17 +30,17 @@ int main(){
 	//Definición de los tipos de datos requeridos
 	CampoDeInformacion argumentoA = {
 		{ 1, 3 },
-        "Ingresa el numero de valores en tu arreglo: ",
+        "Ingresa el primer numero: ",
         NULL,
-        entero,
-        positivo
+        decimal,
+        negYpositivos
     };
     
     CampoDeInformacion argumentoB = {
 		{ 1, 5 },
-        "Ingresa el numero de valores en tu arreglo: ",
+        "Ingresa el segundo numero: ",
         NULL,
-        entero,
+        decimal,
         negYpositivos
     };
     
@@ -51,7 +51,7 @@ int main(){
     
 	CampoDeInformacion operacion = {
 		{ 1, 7 },
-        "Ingresa el numero a buscar en tu arreglo: ",
+        "Ingresa la operacion a realiza 0 = SUMA / 1 = RESTA / 2 = MULTIPLICACION / 3 = DIVISION: ",
         NULL,
         entero,
         positivo
@@ -63,7 +63,7 @@ int main(){
 		capturarDato(&operacion);
 		
 		if(atof(operacion.valor)<0 || atof(operacion.valor)>3){
-			printf(" El tama%co del arreglo no puede ser 0.",164);
+			printf(" La opcion se debe de encontrar entre 0 y 3",164);
 			getchar();getchar();
 			
 		}

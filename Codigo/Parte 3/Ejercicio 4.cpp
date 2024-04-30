@@ -16,17 +16,17 @@ int main(){
 	//Definición de los tipos de datos requeridos
 	CampoDeInformacion tempCelsius = {
 		{ 1, 3 },
-        "Ingresa el numero de valores a promediar: ",
+        "Ingresa la temperatura en grados celcius: ",
         NULL,
         entero,
         positivo
     };
      
-    centerTitle("- Operaciones entre dos numeros usando funciones -");
+    centerTitle("- Convertir de Celsius a Farenheit -");
     
     capturarDato(&tempCelsius);  
 	
-	printf("\n El promedio de estos datos es: %0.4f",conversionFarenheit(atof(tempCelsius.valor)));
+	printf("\n La temperatura en grados celsius equivale a : %0.4f grados farenheit",conversionFarenheit(atof(tempCelsius.valor)));
 	  
     return 0;
 }
