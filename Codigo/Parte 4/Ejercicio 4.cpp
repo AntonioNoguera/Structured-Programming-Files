@@ -10,11 +10,11 @@
 
 void imprimirMatriz(int** matriz, int dimension){
 	
-	printf("\n Resultado Final");
-	for(int i=0; i<dimension; i++){
-		printf("\n\nColumna %d:  ",i);
+	printf("\n \n Resultado Final");
+	for(int i=0; i<dimension; i++){ 
+		printf("\n \n");
 		for(int j=0; j<dimension; j++){
-			printf("%d  ",matriz[i][j]);
+			printf(" %d  ",matriz[j][i]);
 		}
 	}
 }
@@ -30,11 +30,12 @@ int** liberarMemoria(int** matriz , int dimensiones) {
 
 int** capturarValores(int** matriz , int dimensiones, int nMatriz) {
 	
+	
 	for (int i = 0; i < dimensiones; i++) {
         for (int j = 0; j < dimensiones; j++) {
         	
         	CampoDeInformacion datoMatriz = {
-				{ 1 + i*4, j*2 +6 + (2*dimensiones*nMatriz) },
+				{ 1 + i*4, j*2 + 6 + (2*dimensiones*nMatriz) },
 		        "",
 		        NULL,
 		        entero,
@@ -85,20 +86,15 @@ int** multiplicarMatrices(int** matrizA, int** matrizB,  int dimensionMatriz){
 	int **matrizResultante = crearMatriz(dimensionMatriz,false,0);
 	
 	
-	for(int i=0; i<dimensionMatriz; i++){
-		for(int j=0; j<dimensionMatriz; j++){
-			int final = 0;
-			
-			//For para calcular el producto de vectores
-			for(int w = 0; w<dimensionMatriz; w++){
-				final += matrizA[w][j] * matrizB[j][w];
-			}
-			
-			
-				printf("\n\nResultado de la columna %d / %d = %d",i,j,final);
-			matrizResultante[i][j] = final;
-		}
-	}
+	for (int i = 0; i < dimensionMatriz; i++) {
+        for (int j = 0; j < dimensionMatriz; j++) {
+            matrizResultante[i][j] = 0;
+            printf("\n"); 
+            for (int k = 0; k < dimensionMatriz; k++) {
+                matrizResultante[i][j] += matrizA[k][j] * matrizB[i][k];
+            }
+        }
+    }
 	
 	return matrizResultante;
 }
@@ -131,9 +127,13 @@ int main(){
 	
 	int **matrizA = crearMatriz(dimensionCast,true,0);
 	int **matrizB = crearMatriz(dimensionCast,true,1); 
-	int **matrizC =	multiplicarMatrices(matrizA, matrizA, dimensionCast);
+	int **matrizC =	multiplicarMatrices(matrizA, matrizB, dimensionCast);
 	
-	//imprimirMatriz(matrizA, dimensionCast);
+	imprimirMatriz(matrizC, dimensionCast);
+	
+	liberarMemoria(matrizA, dimensionCast);
+	liberarMemoria(matrizB, dimensionCast);
+	liberarMemoria(matrizC, dimensionCast);
 		  
     return 0;
 }

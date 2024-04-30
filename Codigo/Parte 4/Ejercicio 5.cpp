@@ -1,87 +1,130 @@
 //Ej 5.- Escribe un programa que calcule el promedio de cada columna en una matriz bidimensional. 
 //Utiliza funciones para la lectura de la matriz y el cálculo del promedio, y luego imprime los resultados.
-#include <stdio.h>  
+#include <stdio.h> 
 #include <stdlib.h>
 #include <windows.h>
 
-void promedioColumna(){
+#include "cUtils.h" 
+
+void imprimirMatriz(int** matriz, int dimension){
+	
+	printf("\n \n Resultado Final");
+	for(int i=0; i<dimension; i++){ 
+		printf("\n \n");
+		for(int j=0; j<dimension; j++){
+			printf(" %d  ",matriz[j][i]);
+		}
+	}
+}
+
+int** liberarMemoria(int** matriz , int dimensiones) {
+	
+	for (int i = 0; i < dimensiones; i++) {
+        free(matriz[i]);
+    }
+    
+    free(matriz);
+}
+
+int** capturarValores(int** matriz , int dimensiones, int nMatriz) {
+	
+	
+	for (int i = 0; i < dimensiones; i++) {
+        for (int j = 0; j < dimensiones; j++) {
+        	
+        	CampoDeInformacion datoMatriz = {
+				{ 1 + i*4, j*2 + 6 + (2*dimensiones*nMatriz) },
+		        "",
+		        NULL,
+		        entero,
+		        negYpositivos
+		    };
+		    
+        	capturarDato(&datoMatriz);
+        	
+            matriz[i][j] = atoi(datoMatriz.valor); 
+        } 
+    }
+    
+    return matriz;
+}
+
+int** crearMatriz(int numFilas, bool leerValores, int nMatriz) {
+    int **matriz;
+    int i;
+    
+    matriz = (int**) malloc(numFilas * sizeof(int*));
+    if (matriz == NULL) {
+        fprintf(stderr, "Error de asignación de memoria para las filas\n");
+        return NULL;
+    }
+    
+    for (i = 0; i < numFilas; i++) {
+        matriz[i] = (int*) malloc(numFilas * sizeof(int)); 
+        if (matriz[i] == NULL) {
+            fprintf(stderr, "Error de asignación de memoria para la fila %d\n", i);
+            
+            for (int k = 0; k < i; k++) {
+                free(matriz[k]);
+            }
+            free(matriz);
+            return NULL;
+        }
+    }
+
+	if(leerValores){
+		return capturarValores(matriz, numFilas,nMatriz);	
+	}else{
+		return matriz;
+	}
 	
 }
 
-void leerMatriz(){
+void promediarColumnas(int** matrizA, int dimensionMatriz){
+	int **matrizResultante = crearMatriz(dimensionMatriz,false,0);
 	
+	
+	for (int i = 0; i < dimensionMatriz; i++) {
+		float promedio = 0.0;
+        for (int j = 0; j < dimensionMatriz; j++) {
+            promedio += matrizA[i][j];
+        }
+        printf("\nEl promedio de la columna %d es: %0.4f",i+1,promedio/dimensionMatriz);
+    }
+	 
 }
 
 int main(){  
 	//Definición de los tipos de datos requeridos
-	CampoDeInformacion precio = {
+	CampoDeInformacion dimensionMatriz = {
 		{ 1, 3 },
-        "Ingresa el precio del producto: ",
-        NULL,
-        decimal,
-        positivo
-    };
-    
-    CampoDeInformacion tipoUsuario = {
-		{ 1, 5 },
-        "Ingresa el tipo de usuario 1 = No afiliado, 2 = Afiliado, 3 = Ejecutivo: ",
+        "Ingresa la dimension de tus matrices cuadradas: ",
         NULL,
         entero,
         positivo
     };
-    
-    centerTitle("- Calculadora del precio final de un producto, dado un tipo de usuario -");
-	
+     
+    centerTitle("- Multiplicacion de dos matrices de mismo orden -");
 	
 	//Validacion Específica
 	do{
-		capturarDato(&precio);
+		capturarDato(&dimensionMatriz);
 		
-		if(atof(precio.valor)==0){
-			printf(" El precio no puede ser 0.");
+		if(atof(dimensionMatriz.valor) == 0) {
+			printf(" El tama%co de la matriz no puede ser 0.",164);
 			getchar();getchar();
 		}
-	}while(atof(precio.valor)==0);
-	
-	//Validdacion Especifica!
-	do{
-		capturarDato(&tipoUsuario);
 		
-		if(atoi(tipoUsuario.valor)<1 || atoi(tipoUsuario.valor)>3){
-			printf(" El valor debe de ser desde 1 hasta 3, intenta nuevamente");
-			getchar();getchar();
-		}
-	}while(atoi(tipoUsuario.valor)<1 || atoi(tipoUsuario.valor)>3);
+	}while(atof(dimensionMatriz.valor)==0);
 	
 	
+	int dimensionCast = atoi(dimensionMatriz.valor);
 	
-	//Codificación específica
+	int **matrizA = crearMatriz(dimensionCast,true,0);  
 	
-	float precioCrudo = atof(precio.valor);
-	int numUsuario = atoi(tipoUsuario.valor);
+	promediarColumnas(matrizA, dimensionCast); 
 	
-	dataCord resultadoLine = { 1, 7 }; gotoxy(&resultadoLine);
-	printf("El precio para el usuario ");
-	
-	switch(numUsuario) {
-        case 1:
-        	printf("no afiliado %0.4f, no hay descuento",precioCrudo);
-            break;
-            
-        case 2:
-        	precioCrudo = precioCrudo - precioCrudo*.10;
-        	printf("afiliado %0.4f, descuento de 10%c",precioCrudo,37);
-            break;
-            
-        case 3: 
-        	precioCrudo = precioCrudo - precioCrudo*.30;
-        	printf("ejecutivo %0.4f , descuento de 30%c",precioCrudo,37);
-            break;
-            
-        default:
-            printf("Sobrepasaste la validacion increible!");
-            break;
-    }
-    
+	liberarMemoria(matrizA, dimensionCast); 
+		  
     return 0;
- }
+}
